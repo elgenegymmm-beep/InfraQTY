@@ -2,13 +2,25 @@ namespace InfraQTY.Core.Models;
 
 public class FittingItem
 {
-    public string Name { get; set; } = string.Empty;
-
     public string Type { get; set; } = string.Empty;
 
-    public string Size { get; set; } = string.Empty;
+    public double Diameter { get; set; }
 
-    public string Material { get; set; } = string.Empty;
+    public int Quantity { get; set; }
 
-    public double Quantity { get; set; }
+    public string Unit { get; set; } = "pcs";
+
+    public FittingItem()
+    {
+    }
+
+    public FittingItem(
+        string type,
+        double diameter,
+        int quantity)
+    {
+        Type = type;
+        Diameter = diameter;
+        Quantity = quantity;
+    }
 }
