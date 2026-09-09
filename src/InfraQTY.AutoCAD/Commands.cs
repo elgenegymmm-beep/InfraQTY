@@ -24,10 +24,14 @@ public class Commands
         PipeCalculator calculator = new PipeCalculator();
 
         double totalLength = calculator.CalculateTotalLength(pipes);
-        double pvcLength = calculator.CalculateLengthByDiameter(pipes, 0.30);
+
+        double pvcLength =
+            calculator.CalculateLengthByDiameter(pipes, 0.30);
 
         ed.WriteMessage(
-            $"\nInfraQTY Results" +
+            "\n====================" +
+            "\n   InfraQTY Results" +
+            "\n====================" +
             $"\nTotal Pipe Length: {totalLength} m" +
             $"\nPVC 300mm Length: {pvcLength} m"
         );
