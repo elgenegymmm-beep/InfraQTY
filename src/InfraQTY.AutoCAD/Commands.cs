@@ -2,6 +2,7 @@ using Autodesk.AutoCAD.Runtime;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 using InfraQTY.Core.Models;
+using InfraQTY.Core.Services;
 
 namespace InfraQTY.AutoCAD;
 
@@ -13,16 +14,22 @@ public class Commands
         Document doc = Application.DocumentManager.MdiActiveDocument;
         Editor ed = doc.Editor;
 
-        PipeItem testPipe = new PipeItem(
-            "PVC",
-            0.30,
-            100,
-            1);
+        List<PipeItem> pipes = new List<PipeItem>
+        {
+            new PipeItem("PVC", 0.30, 100, 1),
+            new PipeItem("PVC", 0.30, 50, 1),
+            new PipeItem("HDPE", 0.50, 75, 1)
+        };
+
+        PipeCalculator calculator = new PipeCalculator();
+
+        double totalLength = calculator.CalculateTotalLength(pipes);
+        double pvcLength = calculator.CalculateLengthByDiameter(pipes, 0.30);
 
         ed.WriteMessage(
-            $"\nInfraQTY is running!" +
-            $"\nMaterial: {testPipe.Material}" +
-            $"\nDiameter: {testPipe.Diameter}" +
-            $"\nLength: {testPipe.Length} m");
+            $"\nInfraQTY Results" +
+            $"\nTotal Pipe Length: {totalLength} m" +
+            $"\nPVC 300mm Length: {pvcLength} m"
+        );
     }
 }
